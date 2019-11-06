@@ -1,17 +1,36 @@
 {
-  "name": "spb-metro",
+  "name": "@experium/spb-metro",
   "version": "0.1.0",
-  "private": true,
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
+    "konva": "^4.0.16",
+    "ramda": "^0.26.1",
+    "react-konva": "^16.10.1-0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.0",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0"
   },
+  "peerDependencies": {
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "prebuild": "rm -rf lib",
+    "build": "babel src/map --out-dir lib"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -746,7 +746,7 @@ const getStations = () => {
         filter(({ helpful }) => !helpful, stations).map(({ id, name }) => ({
             id,
             title: name,
-            lines: [index],
+            lines: [index + 1],
             checks: [id]
         }))
     ));

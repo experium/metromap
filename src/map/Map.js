@@ -6,6 +6,10 @@ import { LINES, CONNECTORS } from './constants/lines';
 import { RIVER, HOLES } from './constants/river';
 
 export default class Map extends Component {
+    static defaultProps = {
+        width: 1000
+    };
+
     constructor(props) {
         super(props);
 
@@ -75,7 +79,7 @@ export default class Map extends Component {
 
     render() {
         return <Stage
-            width={1000}
+            width={this.props.width}
             height={1329}
             onWheel={this.handleWheel}
             scaleX={this.state.stageScale}

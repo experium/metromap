@@ -1,4 +1,4 @@
-import { find, propEq, flatten } from 'ramda';
+import { find, propEq, flatten, filter, uniqBy, prop, sortBy } from 'ramda';
 
 export const LINES = [
     {
@@ -740,3 +740,26 @@ export const CONNECTORS = [
     const station = find(propEq('id', id), flatten(LINES.map(line => line.stations)));
     return [station.x, station.y];
 })));
+
+const getStations = () => {
+    const stations = flatten(LINES.map(({ stations }, index) =>
+        filter(({ helpful }) => !helpful, stations).map(({ id, name }) => ({
+            id,
+            title: name,
+            lines: [index],
+            checks: [id]
+        }))
+    ));
+
+    return sortBy(prop('title'), uniqBy(prop('title'), stations.map(station => {
+        const sameStation = find(s => s.title === station.title && s.id !== station.id, stations);
+
+        return sameStation ? {
+            ...station,
+            lines: station.lines.concat(sameStation.lines),
+            checks: station.checks.concat(sameStation.checks)
+        } : station;
+    })));
+}
+
+export const SPB_STATIONS = getStations();

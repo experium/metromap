@@ -87,6 +87,7 @@ export default class Map extends Component {
             x={this.state.stageX}
             y={this.state.stageY}
             onMouseEnter={() => document.body.style.cursor = 'grab'}
+            onMouseLeave={() => document.body.style.cursor = 'default'}
             draggable>
             <Layer>
                 <Line

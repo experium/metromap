@@ -10,7 +10,7 @@ export default class Map extends Component {
         super(props);
 
         this.state = {
-            stageScale: 1,
+            stageScale: props.initialScale || 1,
             stageX: 0,
             stageY: 0,
             checked: props.value || []
@@ -30,15 +30,12 @@ export default class Map extends Component {
 
         const newScale = e.evt.deltaY > 0 ? oldScale * scaleBy : oldScale / scaleBy;
 
-        if (newScale > 1) {
-            stage.scale({ x: newScale, y: newScale });
-
-            this.setState({
-                stageScale: newScale,
-                stageX: -(mousePointTo.x - stage.getPointerPosition().x / newScale) * newScale,
-                stageY: -(mousePointTo.y - stage.getPointerPosition().y / newScale) * newScale
-            });
-        }
+        stage.scale({ x: newScale, y: newScale });
+        this.setState({
+            stageScale: newScale,
+            stageX: -(mousePointTo.x - stage.getPointerPosition().x / newScale) * newScale,
+            stageY: -(mousePointTo.y - stage.getPointerPosition().y / newScale) * newScale
+        });
     };
 
     checkStation = (id, checkConnectors) => {

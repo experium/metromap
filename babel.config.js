@@ -26,7 +26,10 @@ module.exports = api => {
             ['@babel/plugin-proposal-class-properties', {
                 'loose': true
             }],
-            '@babel/plugin-proposal-export-default-from'
+            '@babel/plugin-proposal-export-default-from',
+            '@babel/plugin-transform-arrow-functions',
+            '@babel/plugin-transform-spread',
+            '@babel/plugin-transform-classes',
         ]
     }
 }
